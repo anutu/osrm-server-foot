@@ -1,0 +1,10 @@
+FROM osrm/osrm-backend
+
+WORKDIR /data
+
+RUN curl -L "https://drive.google.com/file/d/1KiiaMTAZUWTI_wLUPxmz-E5ttaXVaQAT/view?usp=drive_link" -o osrm-volga.tar.gz \
+    && tar -xzf osrm-volga.tar.gz && rm osrm-volga.tar.gz
+
+EXPOSE 5000
+
+CMD ["osrm-routed", "--algorithm", "mld", "/data/volga-fed-district-latest.osrm"]
